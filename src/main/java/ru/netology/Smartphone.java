@@ -6,10 +6,10 @@ public class Smartphone extends Product {
     private String name;
     ;
 
-    public Smartphone(int id, String title, int price, String manufacturer,String name) {
+    public Smartphone(int id, String title, int price, String manufacturer, String name) {
         super(id, title, price);
         this.manufacturer = manufacturer;
-        this.name=name;
+        this.name = name;
     }
 
 
@@ -20,6 +20,7 @@ public class Smartphone extends Product {
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
+
     public String getName() {
         return name;
     }

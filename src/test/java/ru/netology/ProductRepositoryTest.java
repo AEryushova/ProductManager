@@ -18,18 +18,18 @@ public class ProductRepositoryTest {
         repo.save(products3);
         Product[] expected = {products1, products2, products3};
         Product[] actual = repo.findAll();
-        Assertions.assertArrayEquals(expected,actual);
+        Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void shouldRemoveProductById(){
+    public void shouldRemoveProductById() {
         repo.save(products1);
         repo.save(products2);
         repo.save(products3);
         repo.removeById(3);
         Product[] expected = {products1, products3};
         Product[] actual = repo.findAll();
-        Assertions.assertArrayEquals(expected,actual);
+        Assertions.assertArrayEquals(expected, actual);
     }
 }
 

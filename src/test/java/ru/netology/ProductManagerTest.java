@@ -16,7 +16,6 @@ public class ProductManagerTest {
     Product products5 = new Book(18, "Книга", 498, "Лев Толстой", "Война и мир");
 
 
-
     @BeforeEach
     public void save() {
         repo.save(products2);
@@ -33,34 +32,35 @@ public class ProductManagerTest {
     }
 
     @Test
-    public void shouldProductSearchByTitle(){
+    public void shouldProductSearchByTitle() {
         manager.searchBy("Смартфон");
-        Product[]expected={products2};
-        Product[] actual ={products2};
+        Product[] expected = {products2};
+        Product[] actual = {products2};
         Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void shouldAllProductSearchByTitle(){
+    public void shouldAllProductSearchByTitle() {
         manager.add(products1);
         manager.add(products5);
         manager.searchBy("Книга");
-        Product[]expected={products1,products5};
-        Product[] actual = {products1,products5};
+        Product[] expected = {products1, products5};
+        Product[] actual = {products1, products5};
         Assertions.assertArrayEquals(expected, actual);
     }
 
 
     @Test
-    public void shouldMatchingTheProductToTheSearchQuery(){
-        manager.matches(products2,"Смартфон");
+    public void shouldMatchingTheProductToTheSearchQuery() {
+        manager.matches(products2, "Смартфон");
         boolean expected = true;
         boolean actual = true;
         Assertions.assertEquals(expected, actual);
     }
+
     @Test
-    public void notMatchingTheProductToTheSearchQuery(){
-        manager.matches(products2,"Книга");
+    public void notMatchingTheProductToTheSearchQuery() {
+        manager.matches(products2, "Книга");
         boolean expected = false;
         boolean actual = false;
         Assertions.assertEquals(expected, actual);
