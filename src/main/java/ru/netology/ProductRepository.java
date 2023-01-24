@@ -11,16 +11,37 @@ public class ProductRepository {
 
 
     public void removeById(int id) {
-        Product[] tmp = new Product[products.length - 1];
-        int copyIndex = 0;
-        for (Product product : products) {
-            if (product.getId() != id) {
-                tmp[copyIndex] = product;
-                copyIndex++;
+        if (findById(id) == null) {
+            throw new NotFoundException("Element with id: " + id + " not found");
+        } else {
+            Product[] tmp = new Product[products.length - 1];
+            int copyIndex = 0;
+            for (Product product : products) {
+                if (product.getId() != id) {
+                    tmp[copyIndex] = product;
+                    copyIndex++;
+                }
+            }
+            products = tmp;
+        }
+    }
+
+    public Product[] findById(int id) {
+        Product[] result = new Product[0];
+        for (Product prod : products) {
+            if (prod.getId() == id) {
+                Product[] searchId = new Product[result.length + 1];
+                for (int i = 0; i < result.length; i++) {
+                    searchId[i] = result[i];
+                }
+                searchId[searchId.length - 1] = prod;
+                result = searchId;
+                return result;
             }
         }
-        products = tmp;
+        return null;
     }
+
 
     public void save(Product product) {
         Product[] tmp = new Product[products.length + 1];

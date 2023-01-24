@@ -8,8 +8,13 @@ public class ProductManager {
     }
 
     public void add(Product product) {
-        repo.save(product);
+        if (repo.findById(product.id) == null) {
+            repo.save(product);
+        } else {
+            throw new AlreadyExistsException("Element with id: " + product.getId() + " already added");
+        }
     }
+
 
     public Product[] searchBy(String text) {
         Product[] result = new Product[0];

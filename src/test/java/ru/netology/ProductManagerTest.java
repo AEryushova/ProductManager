@@ -50,9 +50,15 @@ public class ProductManagerTest {
 
     @Test
     public void shouldMatchingTheProductToTheSearchQuery() {
-        manager.matches(products2, "Смартфон");
         boolean expected = true;
-        boolean actual = true;
+        boolean actual = manager.matches(products2, "Смартфон");
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void noShouldMatchingTheProductToTheSearchQuery() {
+        boolean expected = false;
+        boolean actual = manager.matches(products2, "Шампунь");
         Assertions.assertEquals(expected, actual);
     }
 }
