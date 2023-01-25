@@ -18,17 +18,24 @@ public class ProductManagerTest {
 
     @BeforeEach
     public void save() {
+        repo.save(products1);
         repo.save(products2);
         repo.save(products3);
-        repo.save(products4);
     }
 
     @Test
     public void shouldAddNewProductInRepo() {
-        manager.add(products1);
-        Product[] expected = {products2, products3, products4, products1};
+        manager.add(products4);
+        Product[] expected = {products1, products2, products3, products4};
         Product[] actual = repo.findAll();
         Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldThereIsNoProductWithTheSameId() {
+        Assertions.assertThrows(AlreadyExistsException.class, () -> {
+            manager.add(products3);
+        });
     }
 
     @Test
@@ -40,13 +47,11 @@ public class ProductManagerTest {
 
     @Test
     public void shouldAllProductSearchByTitle() {
-        manager.add(products1);
         manager.add(products5);
         Product[] expected = {products1, products5};
         Product[] actual = (manager.searchBy("Книга"));
         Assertions.assertArrayEquals(expected, actual);
     }
-
 
     @Test
     public void shouldMatchingTheProductToTheSearchQuery() {
