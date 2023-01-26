@@ -11,6 +11,7 @@ public class ProductRepositoryTest {
     Product products1 = new Book(14, "Книга", 498, "Джордж Оруэлл", "Скотный двор");
     Product products2 = new Smartphone(3, "Смартфон", 15999, "Honor", "50 Lite");
     Product products3 = new Product(10, "Шампунь", 1100);
+    Product products4 = new Book(18, "Книга", 498, "Лев Толстой", "Война и мир");
 
     @BeforeEach
     public void save() {
@@ -32,6 +33,20 @@ public class ProductRepositoryTest {
     public void shouldRemoveNonExistentProductById() {
         Assertions.assertThrows(NotFoundException.class, () -> {
             repo.removeById(45);
+        });
+    }
+    @Test
+    public void shouldAddNewProductInRepo() {
+        manager.add(products4);
+        Product[] expected = {products1, products2, products3, products4};
+        Product[] actual = repo.findAll();
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldThereIsNoProductWithTheSameId() {
+        Assertions.assertThrows(AlreadyExistsException.class, () -> {
+            manager.add(products3);
         });
     }
 }
